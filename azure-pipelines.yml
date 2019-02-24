@@ -1,0 +1,43 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+pr:
+- master/src
+- master/tests
+
+pool:
+  vmImage: 'vs2017-win2016'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- powershell: |
+   git clone https://github.com/original-decisions/ci-cd -v --progress;
+   
+   dir;
+  errorActionPreference: silentlyContinue
+  workingDirectory: '$(Build.Repository.LocalPath)'
+  displayName: 'clone ci scripts'
+- template: ci-cd/AzureDevOps_(VSTS)/templates/netcoreapp_pr_ps.yml
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+  inputs:
+    Contents: |
+     **/*.nupkg
+     **/*test*.xml
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+
+- task: YodLabs.VariableTasks.AddTag.AddTag@0
+  displayName: 'Add Tag(s) SysExchange Succeeded to build'
+  inputs:
+    tags: |
+     Core
+     Entity
+     Succeeded
