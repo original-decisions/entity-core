@@ -8,6 +8,7 @@ resources:
       type: github
       name: original-decisions/ci-cd
       endpoint: original-decisions
+      ref: refs/heads/master
 
 pr:
 - master/src
