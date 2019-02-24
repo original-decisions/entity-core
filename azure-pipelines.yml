@@ -27,7 +27,7 @@ steps:
   errorActionPreference: silentlyContinue
   workingDirectory: '$(Build.Repository.LocalPath)'
   displayName: 'clone ci scripts'
-- template: ci-cd/AzureDevOps_(VSTS)/templates/netcoreapp_pr_ps.yml@ci_cd
+- template: /AzureDevOps_(VSTS)/templates/netcoreapp_pr_ps.yml@ci_cd
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
