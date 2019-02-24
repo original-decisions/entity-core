@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 resources:
   repositories:
-    - repository: ci-cd
+    - repository: ci_cd
       type: github
       name: original-decisions/ci-cd
       endpoint: original-decisions
@@ -27,7 +27,7 @@ steps:
   errorActionPreference: silentlyContinue
   workingDirectory: '$(Build.Repository.LocalPath)'
   displayName: 'clone ci scripts'
-- template: ci-cd/AzureDevOps_(VSTS)/templates/netcoreapp_pr_ps.yml@ci-cd
+- template: ci-cd/AzureDevOps_(VSTS)/templates/netcoreapp_pr_ps.yml@ci_cd
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
