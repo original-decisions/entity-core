@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 resources:
   repositories:
-    - repository: ci_cd
+    - repository: ci-cd
       type: github
       name: original-decisions/ci-cd
       endpoint: original-decisions
