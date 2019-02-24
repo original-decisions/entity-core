@@ -2,6 +2,11 @@
 # Build and test ASP.NET Core projects targeting .NET Core.
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+resources:
+  repositories:
+    - repository: ci_cd
+      type: github
+      name: original-decisions/ci-cd
 
 pr:
 - master/src
@@ -21,7 +26,7 @@ steps:
   errorActionPreference: silentlyContinue
   workingDirectory: '$(Build.Repository.LocalPath)'
   displayName: 'clone ci scripts'
-- template: ci-cd/AzureDevOps_(VSTS)/templates/netcoreapp_pr_ps.yml
+- template: AzureDevOps_(VSTS)/templates/netcoreapp_pr_ps.yml@ci-cd
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
